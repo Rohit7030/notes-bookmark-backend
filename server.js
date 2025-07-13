@@ -12,15 +12,21 @@ const app = express();
 
 // Middleware
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://notes-bookmark-frontend-lzo208xd4.vercel.app", // ✅ Replace with your Vercel frontend URL
+  "http://localhost:5173",                         // local dev
+  "https://notes-bookmark-frontend.vercel.app",   // ✅ your deployed frontend
 ];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true, // optional for JWT
   })
 );
 
