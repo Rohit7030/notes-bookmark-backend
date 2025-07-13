@@ -13,7 +13,7 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://your-frontend.vercel.app", // ✅ Replace with your Vercel frontend URL
+  "https://notes-bookmark-frontend-lzo208xd4.vercel.app", // ✅ Replace with your Vercel frontend URL
 ];
 
 app.use(
